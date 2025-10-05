@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 const router = express.Router()
 
-// Get list of all courses in the database
+// Get list of all courses in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/coursescourses/
 router.get("/courses", async(req,res) => {
   try{
     const course = await Course.find({})
@@ -21,7 +21,7 @@ router.get("/courses", async(req,res) => {
   }
 })
 
-//Grab a single course in the database... GET Request to /api/courses
+//Grab a single course in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/courses:id
 router.get("/courses/:id", async(req,res) => {
   try {
     const course = await Course.findById(req.params.id)
@@ -32,7 +32,7 @@ router.get("/courses/:id", async(req,res) => {
   }
 })
 
-//Add a course to the database... POST Request to /api/courses
+//Add a course to the database... POST Request to https://group-5-final-project-backend.onrender.com/api/courses
 router.post("/courses", async(req,res) => {
   try {
     const course = await new Course(req.body)
@@ -43,7 +43,7 @@ router.post("/courses", async(req,res) => {
   }
 })
 
-//update a course in the database.. PUT Request to /api/courses
+//update a course in the database.. PUT Request to https://group-5-final-project-backend.onrender.com/api/courses:id
 router.put("/courses/:id", async(req,res) => {
   try{
     const course = req.body
@@ -54,7 +54,7 @@ router.put("/courses/:id", async(req,res) => {
   }
 })
 
-//delete a course in the database... DELETE Request to /api/courses
+//delete a course in the database... DELETE Request to https://group-5-final-project-backend.onrender.com/api/courses:id
 router.delete("/courses/:id", async(req,res) => {
   try{
     await Course.deleteOne({_id: req.params.id})
@@ -64,6 +64,5 @@ router.delete("/courses/:id", async(req,res) => {
   }
 })
 
-//all requests that usually use an api atart with /api.. so the url would be localhost:3000/api/courses
+//all requests that usually use an api atart with /api.. so the url would be https://group-5-final-project-backend.onrender.com/api/courses
 app.use("/api", router)
-app.listen(3000)
