@@ -32,13 +32,34 @@ router.get("/courses/:id", async(req,res) => {
   }
 })
 
-//added a course to the database
+//Add a course to the database
 router.post("/courses", async(req,res) => {
   try {
     const course = await new Course(req.body)
     await course.save()
     res.status(201).json(course)
   } catch (err) {
+    res.status(400).send(err)
+  }
+})
+
+//update a course in the database
+router.put("/courses/:id", async(req,res) => {
+  try{
+    const course = req.body
+    await Course.updateOne({_id: req.params.id}, course)
+    res.sendStatus(204)
+  }catch (err) {
+    res.status(400).send(err)
+  }
+})
+
+//delete a course in the database
+router.delete("/courses/:id", async(req,res) => {
+  try{
+    await Course.deleteOne({_id: req.params.id})
+    res.sendStatus(204)
+  }catch (err) {
     res.status(400).send(err)
   }
 })
