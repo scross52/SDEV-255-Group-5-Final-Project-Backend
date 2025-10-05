@@ -21,7 +21,7 @@ router.get("/courses", async(req,res) => {
   }
 })
 
-//Grab a single course in the database
+//Grab a single course in the database... GET Request to /api/courses
 router.get("/courses/:id", async(req,res) => {
   try {
     const course = await Course.findById(req.params.id)
@@ -32,7 +32,7 @@ router.get("/courses/:id", async(req,res) => {
   }
 })
 
-//Add a course to the database
+//Add a course to the database... POST Request to /api/courses
 router.post("/courses", async(req,res) => {
   try {
     const course = await new Course(req.body)
@@ -43,7 +43,7 @@ router.post("/courses", async(req,res) => {
   }
 })
 
-//update a course in the database
+//update a course in the database.. PUT Request to /api/courses
 router.put("/courses/:id", async(req,res) => {
   try{
     const course = req.body
@@ -54,7 +54,7 @@ router.put("/courses/:id", async(req,res) => {
   }
 })
 
-//delete a course in the database
+//delete a course in the database... DELETE Request to /api/courses
 router.delete("/courses/:id", async(req,res) => {
   try{
     await Course.deleteOne({_id: req.params.id})
