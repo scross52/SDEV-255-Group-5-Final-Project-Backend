@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 const router = express.Router()
 
-// Get list of all courses in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/coursescourses/
+// Get list of all courses in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/courses/
 router.get("/courses", async(req,res) => {
   try{
     const course = await Course.find({})
@@ -21,7 +21,7 @@ router.get("/courses", async(req,res) => {
   }
 })
 
-//Grab a single course in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/courses:id
+//Grab a single course in the database... GET Request to https://group-5-final-project-backend.onrender.com/api/courses/:id
 router.get("/courses/:id", async(req,res) => {
   try {
     const course = await Course.findById(req.params.id)
