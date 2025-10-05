@@ -43,7 +43,7 @@ router.post("/courses", async(req,res) => {
   }
 })
 
-//update a course in the database.. PUT Request to https://group-5-final-project-backend.onrender.com/api/courses:id
+//update a course in the database.. PUT Request to https://group-5-final-project-backend.onrender.com/api/courses/:id
 router.put("/courses/:id", async(req,res) => {
   try{
     const course = req.body
@@ -54,7 +54,7 @@ router.put("/courses/:id", async(req,res) => {
   }
 })
 
-//delete a course in the database... DELETE Request to https://group-5-final-project-backend.onrender.com/api/courses:id
+//delete a course in the database... DELETE Request to https://group-5-final-project-backend.onrender.com/api/courses/:id
 router.delete("/courses/:id", async(req,res) => {
   try{
     await Course.deleteOne({_id: req.params.id})
