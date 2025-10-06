@@ -66,3 +66,4 @@ router.delete("/courses/:id", async(req,res) => {
 
 //all requests that usually use an api atart with /api.. so the url would be https://group-5-final-project-backend.onrender.com/api/courses
 app.use("/api", router)
+app.listen(3000)
