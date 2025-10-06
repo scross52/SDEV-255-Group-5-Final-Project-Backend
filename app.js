@@ -15,7 +15,7 @@ const router = express.Router()
 router.get("/courses", async(req,res) => {
   try{
     const course = await Course.find({})
-    res.send(course)
+    res.json(course)
   } catch (err) {
     res.status(400).send(err)
   }
