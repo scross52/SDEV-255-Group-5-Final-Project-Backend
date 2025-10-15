@@ -6,7 +6,8 @@ const Course = db.model("Course", {
   name: {type:String, required:true},
   teacher: {type:String, required:true},
   classroom: {type:String, required:true},
-  startDate: Date,
+  description: String,
+  startDate: {type:Date, default:Date.now},
 })
 
 module.exports = Course
