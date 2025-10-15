@@ -20,18 +20,22 @@ router.post("/user", async(req,res) => {
     res.status(400).json({error: "Mssing username, password or role"})
     return
   }
+  //attempt to find username in database
   const existingUser = await User.findOne({ username: req.body.username })
+  //if username exists in database, return an error
   if (existingUser) {
     return res.status(400).json({error: "Username already exists"})
   }
 
+  //map properties to create a new user
   const newUser = new User({
     username: req.body.username,
     password: req.body.password,
     role: req.body.role
   })
-
+  
   try {
+    //create new user inside database
     newUser.save()
     res.sendStatus(201) //created
     console.log(newUser)
@@ -47,27 +51,33 @@ router.post("/auth", async(req,res) => {
   }
   let user = await User.findOne({username : req.body.username})
     if(!user) {
+      //check if username exists
       res.status(401).json({error: "Bad Username"})
     } else{
+      //check if password is correct
       if (user.password != req.body.password){
         res.status(400).json({error: "Bad Password"})
       } else {
         //create a token that is encoded with the jwt library, and send back the username... this will be important
-        //we also will send back as part of the token that you are current authorized
-        //we could do this with a boolean or a number value i.e if auth - 0 you are not authorized, if auth
-        //equals 1 you are authorized
+        //Send back as part of the token that you are current authorized
+
         username2 = user.username
         const token = jwt.encode({username: user.username},secret)
 
+
         //Check if user is a teacher or a student
-        console.log(user.role)
+        // if role = 1 then a student is signed in
         let role = 1
+
         if (user.role == 'teacher') {
+         //role = 2 a teacher is signed in
           role = 2
         }
+
+        //assign a constant "auth" with the value of role
         const auth = role
         
-        //respond with the token
+        //respond with the token, usename, and authentication
         res.json({
           username2,
           token:token,
