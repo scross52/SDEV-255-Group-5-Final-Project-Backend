@@ -1,4 +1,4 @@
-const db = require("../db")
+const db = require("../config/db")
 
 const Course = db.model("Course", {
   //hidden property _id
