@@ -115,7 +115,7 @@ router.delete("/:id", async(req,res) => {
       return res.status(404).json({error: "User not found"})
       //check if user is teacher, if not then return 403 forbidden
     } else if (user.role != "teacher") {
-      return res.status(403).json({error: "Only teachers can create a course"})
+      return res.status(403).json({error: "Only teachers can delete a course"})
     }
 
     await Course.deleteOne({_id: req.params.id})

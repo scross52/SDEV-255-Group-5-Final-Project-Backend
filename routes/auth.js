@@ -89,7 +89,7 @@ router.post("/auth", async(req,res) => {
 
 //check status of user with a valid token, see if it matches the front end token
 router.get("/status", async(req,res) => {
-  if(!req/headers["x-auth"]){
+  if(!req.headers["x-auth"]){
     return res.status(401).json({error: "Missing X-Auth"})
   }
     //if x-auth contains the token (it should)
@@ -98,7 +98,8 @@ router.get("/status", async(req,res) => {
       const decoded = jwt.decode(token,secret)
 
       //send back all username and status fields to the user or front end
-      let users = User.find({}, "username status")
+      let users = await User.find({}, "username status")
+      console.log(users)
       res.json(users)
     } catch (ex){
       res.status(401).json({error: "invalid jwt"})
