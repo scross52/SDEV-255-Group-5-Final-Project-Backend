@@ -67,7 +67,7 @@ router.post("/user", async(req,res) => {
 //Route to authenticate a user when signing in
 router.post("/auth", async(req,res) => {
   if(!req.body.username || !req.body.password) {
-    res.status(400).json({error: "Mssing username or password"})
+    res.status(400).json({error: "Missing username or password"})
     return
   }
   let user = await User.findOne({username : req.body.username})
@@ -89,7 +89,7 @@ router.post("/auth", async(req,res) => {
 
 //check status of user with a valid token, see if it matches the front end token
 router.get("/status", async(req,res) => {
-  if(!req/headers["x-auth"]){
+  if(!req.headers["x-auth"]){
     return res.status(401).json({error: "Missing X-Auth"})
   }
     //if x-auth contains the token (it should)
